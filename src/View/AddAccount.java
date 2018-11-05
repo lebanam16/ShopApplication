@@ -7,7 +7,11 @@ package View;
 
 import Controller.Common;
 import Controller.UserController;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -55,10 +59,13 @@ public class AddAccount extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabelUsername.setForeground(new java.awt.Color(255, 0, 51));
         jLabelUsername.setText("Username");
 
+        jLabelPassword.setForeground(new java.awt.Color(255, 0, 51));
         jLabelPassword.setText("Password");
 
+        jLabelTemptPassword.setForeground(new java.awt.Color(255, 0, 51));
         jLabelTemptPassword.setText("Password");
 
         jLabelFullname.setText("Fullname");
@@ -196,17 +203,34 @@ public class AddAccount extends javax.swing.JFrame {
         if (!(Username.isEmpty() || Password.isEmpty() || TemptPassword.isEmpty())) {
             if(Common.CheckSpace(Username)== false){
                 if (Password.equals(TemptPassword)) {
-                    if (userController.CreateNewAccount(Username,Password,Fullname,Address,PhoneNumber)== true) {
-                        JOptionPane.showMessageDialog(null,"Thêm tài khoản thành công","Thông báo",JOptionPane.INFORMATION_MESSAGE);
-                        ListUser listuser;
-                        try {
-                            listuser = new ListUser();
-                            this.dispose();
-                            listuser.setVisible(true);
-                        } catch (SQLException ex) {
-                            Logger.getLogger(AddAccount.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/shopapplication","root","");
+                        Statement stmt=con.createStatement();
+                        ResultSet data = stmt.executeQuery("Select count(Username) as num from user Where Username = '"+Username+"'");
+                        while(data.next()){
+                            if(data.getInt("num")==1){
+                                JOptionPane.showMessageDialog(null,"Tên đăng nhập đã tồn tại, vui lòng chọn tên khác!","Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                if (userController.CreateNewAccount(Username,Password,Fullname,Address,PhoneNumber)== true) {
+                                    JOptionPane.showMessageDialog(null,"Thêm tài khoản thành công","Thông báo",JOptionPane.INFORMATION_MESSAGE);                      
+                                    try {
+                                        ListUser listuser;
+                                        listuser = new ListUser();
+                                        this.dispose();
+                                        listuser.setVisible(true);
+                                    } catch (SQLException ex) {
+                                        Logger.getLogger(AddAccount.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }
+                            }
                         }
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(AddAccount.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) { 
+                        Logger.getLogger(AddAccount.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
                 }
                 else{
                     jLabelCheckMatchPassword.setText("Password is not matching...");
@@ -219,7 +243,14 @@ public class AddAccount extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        ListUser listuser;
+        try {
+            listuser = new ListUser();
+            this.dispose();
+            listuser.setVisible(true); 
+        } catch (SQLException ex) {
+            Logger.getLogger(AddAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**

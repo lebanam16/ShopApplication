@@ -70,10 +70,13 @@ public class Edit extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
         jLabel1.setText("Username");
 
+        jLabel2.setForeground(new java.awt.Color(255, 0, 51));
         jLabel2.setText("Password");
 
+        jLabel3.setForeground(new java.awt.Color(255, 0, 51));
         jLabel3.setText("Password Confirm");
 
         jLabel4.setText("Fullname");

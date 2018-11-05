@@ -51,10 +51,13 @@ public class CreateNewAccount extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabelUsername.setForeground(new java.awt.Color(255, 0, 51));
         jLabelUsername.setText("Username");
 
+        jLabelPassword.setForeground(new java.awt.Color(255, 0, 51));
         jLabelPassword.setText("Password");
 
+        jLabelTemptPassword.setForeground(new java.awt.Color(255, 0, 51));
         jLabelTemptPassword.setText("Password");
 
         jLabelFullname.setText("Fullname");
