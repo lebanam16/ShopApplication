@@ -6,6 +6,7 @@
 package Model;
 
 import Data.User;
+import com.mysql.cj.protocol.Resultset;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -77,5 +78,19 @@ public class UserModel extends User{
             System.out.println("Password was been changed!");
             sql.CloseConnection();
         }
+    }
+    
+    public int GetRole(String username) throws SQLException{
+        int role = 1;
+        String query="Select Role_Id from user Where Username = '"+username+"'";
+        if(sql.connectMySQL()){
+            ResultSet data= sql.ExecuteSelectQuery(query);
+            
+            while(data.next()){
+                role =data.getInt("Role_Id");
+            }
+            sql.CloseConnection();
+        }
+        return role;
     }
 }

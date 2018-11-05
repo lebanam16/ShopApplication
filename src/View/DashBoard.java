@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -12,12 +15,17 @@ import javax.swing.JLabel;
  * @author Duy.hv150601
  */
 public class DashBoard extends javax.swing.JFrame {
-
+    public static int role_user;
     /**
      * Creates new form DashBoard
      */
     public DashBoard() {
         initComponents();
+        if(DashBoard.role_user != 1){
+             qlnv.setVisible(false);
+             System.out.println(DashBoard.role_user);
+        }
+        System.out.println(DashBoard.role_user);
     }    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,12 +54,8 @@ public class DashBoard extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        qlnv = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
@@ -100,7 +104,7 @@ public class DashBoard extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 640, 461);
+        jPanel1.setBounds(0, 0, 640, 464);
 
         jMenu1.setText("Quản lý hóa đơn");
 
@@ -150,24 +154,17 @@ public class DashBoard extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu5);
 
-        jMenu3.setText("Quản lý nhân viên");
+        qlnv.setText("Quản lý nhân viên");
 
-        jMenuItem7.setText("Thêm nhân viên");
-        jMenu3.add(jMenuItem7);
+        jMenuItem8.setText("Quản lý nhân viên");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        qlnv.add(jMenuItem8);
 
-        jMenuItem8.setText("Sửa nhân viên");
-        jMenu3.add(jMenuItem8);
-
-        jMenuItem11.setText("Xóa nhân viên");
-        jMenu3.add(jMenuItem11);
-
-        jMenuItem12.setText("Tìm nhân viên");
-        jMenu3.add(jMenuItem12);
-
-        jMenuItem13.setText("Hiển thị toàn bộ nhân viên");
-        jMenu3.add(jMenuItem13);
-
-        jMenuBar2.add(jMenu3);
+        jMenuBar2.add(qlnv);
 
         jMenu4.setText("Quản lý tài khoản");
 
@@ -241,6 +238,18 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        try {
+            // TODO add your handling code here:
+            ListUser listuser = new ListUser();
+            this.dispose();
+            listuser.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     public JLabel getjLabelUsername() {
         return jLabelUsername;
     }
@@ -286,15 +295,11 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUsername;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
@@ -308,9 +313,9 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu qlnv;
     // End of variables declaration//GEN-END:variables
 }

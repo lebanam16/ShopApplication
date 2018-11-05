@@ -110,7 +110,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextUsername">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Username..."/>
+            <Property name="text" type="java.lang.String" value="namlb"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelPassword">
@@ -136,7 +136,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="jPassword">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+            <Property name="text" type="java.lang.String" value="123123"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonNewAccount">

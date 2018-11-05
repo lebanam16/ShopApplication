@@ -29,4 +29,9 @@ public class UserController {
     public void ChangePassword(String Username, String newPassword, String OldPassword){
         userModel.ChangePassword(Username, newPassword);
     }
+    public int GetRole(String username) throws SQLException{
+        int role;
+        role = userModel.GetRole(username);
+        return role;
+    }
 }

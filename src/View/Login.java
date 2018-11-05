@@ -2,6 +2,9 @@ package View;
 
 import Controller.Common;
 import Controller.UserController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /*
@@ -48,7 +51,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabelUsername.setText("Username");
 
-        jTextUsername.setText("Username...");
+        jTextUsername.setText("namlb");
 
         jLabelPassword.setText("Password");
 
@@ -66,7 +69,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jPassword.setText("jPasswordField1");
+        jPassword.setText("123123");
 
         jButtonNewAccount.setText("Create a new account...");
         jButtonNewAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -158,6 +161,11 @@ public class Login extends javax.swing.JFrame {
             else{
                 if (userController.Login(Username, Password)==true) {
                     System.out.println("Login success!");
+                    try {
+                        DashBoard.role_user = userController.GetRole(Username);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     DashBoard dashBoard= new DashBoard();
                     dashBoard.setVisible(true);
                     dashBoard.getjLabelUsername().setText(Username);

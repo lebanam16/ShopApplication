@@ -30,7 +30,7 @@ public class ShopApplication {
             ResultSet data= sql.ExecuteSelectQuery("Select * from product");
             try {
                 while (data.next()) {                
-            }
+                }
             } catch (SQLException e) {                
             }
         }
